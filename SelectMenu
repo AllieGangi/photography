@@ -1,0 +1,75 @@
+
+<html>
+
+<!-- First List -->
+Select Option: <select name="slist1" onchange="SList.getSelect('slist2', this.value);">
+  <option>- - - -</option>
+  <option value="1">Option 1</option>
+  <option value="2">Option 2</option>
+  <option value="3">Option 3</option>
+</select>
+<br></br>
+
+<!-- Second List -->
+  <span id="slist2"></span>
+  <br></br>
+  <div id="slist3"></div>
+<br></br>
+
+  <button id="submit" input type="submit">Submit</button>
+
+<script>
+
+// Obj that stores data for options and text next to box
+var SList = new Object();
+var text = 'Select:';
+
+// Keys are option values for lists
+SList.slist2 = {
+ "1": ['a', 'b', 'c'],
+ "2": ['d', 'e', 'f'],
+ "3": ['d', 'e', 'f']
+};
+
+SList.slist3 = {
+ "4": ['a', 'b', 'c'],
+ "5": ['d', 'e', 'f'],
+ "6": ['d', 'e', 'f']
+};
+
+
+SList.slist3 = {
+ "a": '1',
+ "b": '2',
+ "c": '3',
+ "d": '4',
+ "e": '5',
+ "f": '6'
+};
+
+// function to get 2nd list
+         // empty option-content
+
+// function to get the dropdown list or content
+SList.getSelect = function(slist, option) {
+
+  if(SList[slist][option]) {
+    // if list is 2 or 3
+    if(slist == 'slist2' || 'slist3') {
+      var addata = '<option>- - -</option>';
+
+      for(var i=0; i<SList[slist][option].length; i++) {
+        addata += '<option value="'+SList[slist][option][i]+'">'+SList[slist][option][i]+'</option>';
+      }
+      document.getElementById(slist).innerHTML = text+' <select name="slist" onchange="SList.getSelect(\'slist3\', this.value);">'+addata+'</select>';
+    }
+  }
+  else if(slist == 'slist2' || 'slist3') {
+    // empty the tag for 2nd select list
+    document.getElementById('slist').innerHTML = '';
+  }
+}
+</script>
+</html>
+
+
